@@ -4,17 +4,17 @@ pipeline{
     stages {
         stage('Install dependencies'){
             steps{
-                sh 'pip install -r /var/scripts/python/requirements.txt --break-system-packages'
+                sh 'pip install -r requirements.txt --break-system-packages'
             }
         }
         stage('Run tests'){
              steps{
-                sh 'pytest /var/scripts/python/tests.py'
+                sh 'pytest tests.py'
             }
         }
          stage('Run application'){
             steps{
-                sh 'python3 /var/scripts/python/main.py'
+                sh 'python3 main.py'
             }
         }
     }
