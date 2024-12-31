@@ -12,9 +12,15 @@ pipeline{
                 sh 'pytest tests.py'
             }
         }
-         stage('Run application'){
+        stage('Run application'){
             steps{
                 sh 'python3 main.py'
+            }
+        }
+         stage('Creating tag'){
+            steps{
+                sh "git tag ${env.BUILD_NUMBER}.0"
+                sh "git push origin --tags"
             }
         }
     }
