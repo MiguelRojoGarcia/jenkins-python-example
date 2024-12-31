@@ -17,14 +17,18 @@ pipeline{
                 sh 'python3 main.py'
             }
         }
-         stage('Creating tag'){
-            steps{
-                sh "git tag ${env.BUILD_NUMBER}.0"
-                sh "git push origin --tags"
-            }
-        }
     }
     post { 
+        success {
+             script {
+                    def version = "v${env.BUILD_NUMBER}.0" 
+                    def commitId = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
+                    echo "Creando y empujando el tag ${version} para el commit ${commitId}"
+
+                    sh "git tag -a ${version} -m 'Creando tag ${version} en el commit ${commitId}'"
+                    sh "git push origin ${version}"
+                }
+        }
         always { 
             cleanWs()
         }
