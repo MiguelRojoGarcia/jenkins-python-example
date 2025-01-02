@@ -2,6 +2,7 @@ pipeline{
     agent any
     environment{
         ADMINISTRATOR_EMAIL="mrojo@iar-soft.com"
+        ENV="DEV"
         VERSION="1.5"
         DATE="""${
             sh(
@@ -27,11 +28,22 @@ pipeline{
                 sh 'pytest tests.py'
             }
         }
+        stage('Run database backups'){
+            when{
+                environment name: "ENV", value: "PROD"
+            }
+            steps{
+                sh 'echo "Running backups..."'
+            }
+        }
         stage('Run application'){
             steps{
                 sh 'python3 main.py'
             }
         }
+
+
+
         stage('Test variables'){
             steps{
                 echo "${VERSION}" 
