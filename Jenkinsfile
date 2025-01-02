@@ -11,12 +11,14 @@ pipeline{
                 numToKeepStr: '1'
             )
     }
+    /*
     triggers{
         // Basic: pull every minute
         //pollSCM '* * * * *'
         // Improvement: Github hook
         //githubPush()
     }
+    */
     environment{
         ADMINISTRATOR_EMAIL="mrojo@iar-soft.com"
         ENV="DEV"
