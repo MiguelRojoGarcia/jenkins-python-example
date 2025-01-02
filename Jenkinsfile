@@ -50,7 +50,7 @@ pipeline{
                          <pre>${currentBuild.currentResult}</pre>
                          <p>Puedes revisar el log completo en el siguiente enlace: 
                          <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
-                to: "${RECIPIENT}",
+                to: "${ADMINISTRATOR_EMAIL}",
                 mimeType: 'text/html'
             )
         } 
