@@ -1,6 +1,7 @@
 pipeline{
     agent any
     environment{
+        ADMINISTRATOR_EMAIL="mrojo@iar-soft.com"
         VERSION="1.5"
         DATE="""${
             sh(
