@@ -37,11 +37,13 @@ pipeline{
     stages {
         stage('Install dependencies'){
             steps{
+                writeFile(file: "${DATE}.log", text:"[${env.JOB_NAME}][${env.BUILD_NUMBER}] - Install requirements...")
                 sh 'pip install -r requirements.txt --break-system-packages'
             }
         }
         stage('Run tests'){
              steps{
+                writeFile(file: "${DATE}.log", text:"[${env.JOB_NAME}][${env.BUILD_NUMBER}] - Running tests...")
                 sh 'pytest tests.py'
             }
         }
@@ -50,11 +52,13 @@ pipeline{
                 environment name: "ENV", value: "PROD"
             }
             steps{
+                writeFile(file: "${DATE}.log", text:"[${env.JOB_NAME}][${env.BUILD_NUMBER}] - Running database backups...")
                 sh 'echo "Running backups..."'
             }
         }
         stage('Run application'){
             steps{
+                writeFile(file: "${DATE}.log", text:"[${env.JOB_NAME}][${env.BUILD_NUMBER}] - Running application...")
                 sh 'python3 main.py'
             }
         }
