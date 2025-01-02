@@ -1,5 +1,22 @@
 pipeline{
     agent any
+    options {
+        //Time between builds
+        rateLimitBuilds(throttle([count: 5, durationName: 'minute', userBoost: false]))        
+        // Max build log
+        buildDiscarder logRotator(
+                artifactDaysToKeepStr: '',
+                artifactNumToKeepStr: '',
+                daysToKeepStr: '1',
+                numToKeepStr: '1'
+            )
+    }
+    triggers{
+        // Basic: pull every minute
+        //pollSCM '* * * * *'
+        // Improvement: Github hook
+        //githubPush()
+    }
     environment{
         ADMINISTRATOR_EMAIL="mrojo@iar-soft.com"
         ENV="DEV"
@@ -41,9 +58,6 @@ pipeline{
                 sh 'python3 main.py'
             }
         }
-
-
-
         stage('Test variables'){
             steps{
                 echo "${VERSION}" 
