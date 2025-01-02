@@ -2,7 +2,7 @@ pipeline{
     agent any
     options {
         //Time between builds
-        rateLimitBuilds(throttle([count: 5, durationName: 'minute', userBoost: false]))        
+        rateLimitBuilds(throttle:([count: 5, durationName: 'minute', userBoost: false]))        
         // Max build log
         buildDiscarder logRotator(
                 artifactDaysToKeepStr: '',
