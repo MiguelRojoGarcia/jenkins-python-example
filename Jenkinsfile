@@ -4,10 +4,14 @@ pipeline{
     }
     stages{
         stage('Install depedencies'){
-            sh 'pip install --no-cache-dir -r requirements.txt || true'
+            steps{
+                sh 'pip install --no-cache-dir -r requirements.txt || true'
+            }            
         }
         stage('Run tests'){
-            sh 'pytest tests.py'
+            steps{
+                sh 'pytest tests.py'
+            }            
         }
     }
 }
