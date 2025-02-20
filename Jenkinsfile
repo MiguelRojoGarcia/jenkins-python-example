@@ -1,6 +1,6 @@
 node{
     stage('Install depedencies...'){
-        sh 'pip install --no-cache-dir -r requirements.txt || true'
+        sh 'pip install --no-cache-dir -r requirements.txt || true --break-system-packages'
     }
     stage('Runing tests...'){
         sh 'pytest tests.py'
