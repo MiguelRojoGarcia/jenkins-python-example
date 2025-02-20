@@ -1,17 +1,12 @@
-pipeline{
-    agent{
-        docker { image 'python:3.12-slim'}
+node{
+    stage('Install depedencies...'){
+        sh 'pip install --no-cache-dir -r requirements.txt || true'
     }
-    stages{
-        stage('Install depedencies'){
-            steps{
-                sh 'pip install --no-cache-dir -r requirements.txt || true'
-            }            
-        }
-        stage('Run tests'){
-            steps{
-                sh 'pytest tests.py'
-            }            
-        }
+    stage('Runing tests...'){
+        sh 'pytest tests.py'
+    }
+    stage('Run application'){
+        sh 'python3 main.py'
     }
 }
+
